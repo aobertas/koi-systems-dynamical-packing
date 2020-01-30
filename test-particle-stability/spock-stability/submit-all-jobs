@@ -1,0 +1,59 @@
+#!/bin/bash
+
+## ADJACENT TRIPLES
+
+for fsim in {0..17400..100}
+do
+	qsub -v nsys=100,first_sim=$fsim,p1=1,p2=2,p3=3 sunnyvale-systems-predict-stability-qsub-script
+done
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=2,p2=3,p3=4 sunnyvale-systems-predict-stability-qsub-script
+done
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=3,p2=4,p3=5 sunnyvale-systems-predict-stability-qsub-script
+done
+
+## NEXT ADJACENT
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=1,p2=3,p3=5 sunnyvale-systems-predict-stability-qsub-script
+done
+
+## ADDITIONAL COMBINATIONS STARTING WITH PLANET 1
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=1,p2=2,p3=4 sunnyvale-systems-predict-stability-qsub-script
+done
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=1,p2=2,p3=5 sunnyvale-systems-predict-stability-qsub-script
+done
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=1,p2=3,p3=4 sunnyvale-systems-predict-stability-qsub-script
+done
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=1,p2=4,p3=5 sunnyvale-systems-predict-stability-qsub-script
+done
+
+## ADDITIONAL COMBINATIONS STARTING WITH PLANET 2
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=2,p2=3,p3=5 sunnyvale-systems-predict-stability-qsub-script
+done
+
+for fsim in {0..17400..100}
+do
+    qsub -v nsys=100,first_sim=$fsim,p1=2,p2=4,p3=5 sunnyvale-systems-predict-stability-qsub-script
+done
