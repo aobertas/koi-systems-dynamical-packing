@@ -36,63 +36,81 @@ import numpy as np
 np.random.seed(2) # seed random number generator
 outfile = 'initial_conditions.npz' # initial condition file
 
-#######################################################################
-## simulation and system parameters
+golden_ratio = 1.618034
+year = 2 * np.pi # one year in REBOUND time (in units where G=1)
+day = year / 365 # one day in REBOUND time (in units where G=1)
 
-outdir = "/mnt/scratch-lustre/obertas/obertas-2017-systems-2019-ML-paper/" # root directory where simulation data files will be saved
-job_pre = "5b"
+#######################################################################
+## systen/massive planet parameters
 
 m_star = 1.0 # mass of star (solar masses)
-m_planet = 3.0035e-6 # mass of planets (solar masses)
+m_earth = 3.0035e-6 # mass of earth (solar masses)
+m_1 = 3 * m_earth # mass of inner planet (solar masses)
+m_2 = 7 * m_earth # mass of outer planet (solar masses)
 
-Nsims = 16000 # number of simulations
-delta_min = 2. # minimum initial spacing (mutual hill radii)
-delta_max = 10. # maximum initial spacing
+P_ratio = 1.3 * golden_ratio
+P_1 = 10 * day # orbit period of inner planet (days)
+P_2 = P_1 * P_ratio # orbit period of outer planet (days)
 
-delta_rand = np.random.uniform(delta_min,delta_max,Nsims) # initial spacing of planets in mutual hill radii
-delta_sort = np.sort(delta_rand) # sorted in ascending order
+e_1 = 0.01 # eccentricity of inner planet
+e_2 = 0.02 # eccentricity of outer planet
 
-Nbody = 5 # number of planets
-year = 2 * np.pi # One year REBOUND time (in units where G=1)
-tf = 1e9 # maximum integration time (years)
+inc_1 = 1 * np.pi / 180 # inclination of inner planet (radians)
+inc_2 = -1 * np.pi / 180 # inclination of outer planet (radians)
+
+pomega_1 = 0 # orientation of inner planet orbit (radians)
+pomega_2 = 100 * golden_ratio * np.pi / 180 # orientation of outer planet orbit (radians)
+
+#######################################################################
+## simulation parameters
+
+outdir = "/mnt/scratch-lustre/obertas/koi-systems-dynamical-packing/test-particle-stability/" # root directory where simulation data files will be saved
+job_pre = "sim"
+
+Nsims = 10000 # number of simulations
+
+t_max = 1e9 # maximum integration time (orbits)
+
 steps_per_orbit = 20 # timesteps per orbit of the inner planet
-
-a1 = 0.99 # semimajor axis of inner planet (AU)
-dt = year / steps_per_orbit # WHFAST time step in REBOUND time
+dt = P_1 / steps_per_orbit # WHFAST time step in REBOUND time
 
 ### CAUTION: SETTING BELOW TO True WILL SAVE VERY LARGE FILES TO DISK ###
 archive_flag = False # whether or not to save intermediate info to simulation archive
 archive_interval = 10000 * dt
 
 #######################################################################
-## initialise orbital parameters
+## test particle parameters
 
-a_init_all = np.zeros((Nbody,Nsims)) # array containing initial semimajor axis for each (planet, simulation)
-f_init_all = np.random.uniform(0.0,2.0*np.pi,(Nbody,Nsims)) # array containing intial longitudinal position for each (planet, simulation)
+m_test = m_earth * 1e-3 # mass of test particle (solar masses)
 
-#######################################################################
-## calculate initial period and longitudinal angle of planets
+P_min = 1.2 * P_1 # lower bound for test particle period (days)
+P_max = P_2 / 1.2 # upper bound for test particle period (days)
+P_rand = np.random.uniform(P_min,P_max,Nsims) # test particle periods (days)
+P_sort = np.sort(P_rand) # test particle periods, sorted in ascending order (days)
 
-X = 0.5 * (2. * m_planet / (3. * m_star)) ** (1./3) # eq. 4 from Obertas+(2017)
+e_min = 0.005 # lower bound for test particle eccentricity
+e_max = 0.05 # upper bound for test particle eccentricity
+e_rand = np.random.uniform(e_min,e_max,Nsims) # test particle eccentricities
+e_sort = np.sort(e_rand) # test particle eccentricities, sorted in ascending order
 
-for i in range(Nsims):
+inc_min = -5 * np.pi / 180 # lower bound for test particle inclination (radians)
+inc_max = 5 * np.pi / 180 # upper bound for test particle inclination (radians)
+inc_rand = np.random.uniform(inc_min,inc_max,Nsims) # test particle inclinations (radians)
+inc_sort = np.sort(inc_rand) # test particle inclinations, sorted in ascending order (radians)
 
-    delta = delta_sort[i] # value of period ratio for this simulation
-
-    # semimajor axis
-
-    a_init = np.zeros(Nbody) # array of initial semimajor axes
-    a_init[0] = a1
-
-    for j in range(Nbody-1): # iteratively calculate periods
-        a_init[j+1] = a_init[j] * (1 + delta * X) / (1 - delta * X) # eq. 9 from Obertas+(2017)
-
-    a_init_all[:,i] = a_init
+pomega_min = 0 # lower bound for test particle orbit orientation (radians)
+pomega_max = 2 * np.pi # upper bound for test particle orbit orientation (radians)
+pomega_rand = np.random.uniform(pomega_min,pomega_max,Nsims) # test particle orbit orientations (radians)
+pomega_sort = np.sort(e_rand) # test particle orbit orientations, sorted in ascending order (radians)
     
 #######################################################################
       
 ## save initial conditions to file
 
-np.savez(outfile,outdir=outdir,Nbody=Nbody,Nsims=Nsims,tf=tf,m_star=m_star,m_planet=m_planet, \
-                 delta=delta_sort,a=a_init_all,f=f_init_all,spo=steps_per_orbit,dt=dt, \
-                 archive_flag=archive_flag,archive_interval=archive_interval,job_pre=job_pre)
+np.savez(outfile,outdir=outdir,archive_flag=archive_flag,archive_interval=archive_interval,job_pre=job_pre, \
+                 Nsims=Nsims,m_star=m_star,m_1=m_1,m_2=m_2,m_test=m_test, \
+                 P_ratio=P_ratio,P_1=P_1,P_2=P_2,P_min=P_min,P_max=P_max,P_sort=P_sort, \
+                 e_1=e_1,e_2=e_2,e_min=e_min,e_max=e_max,e_sort=e_sort, \
+                 inc_1=inc_1,inc_2=inc_2,inc_min=inc_min,inc_max=inc_max,inc_sort=inc_sort, \
+                 pomega_1=pomega_1,pomega_2=pomega_2,pomega_min=pomega_min,pomega_max=pomega_max,pomega_sort=pomega_sort, \
+                 t_max=t_max,steps_per_orbit=steps_per_orbit,dt=dt)
