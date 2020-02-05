@@ -17,18 +17,9 @@ import random
 import dill
 import sys
 import pandas as pd
-sys.path.append('../../../MLstability/generate_training_data')
-from training_data_functions import ressummaryfeaturesxgbv6
+import spock
 
 np.random.seed(2)
-
-#######################################################################
-## machine learning stuff
-
-folderpath = '../../../MLstability/'
-model = 'ressummaryfeaturesxgbv6_resonant.pkl'
-
-model, features, featurefolder = dill.load(open(folderpath+'/models/'+model, "rb"))
 
 #######################################################################
 ## determine systems to run
@@ -78,6 +69,8 @@ pomega_sort = ic['pomega_sort'] # longitudes of periapsis for Nsims test particl
 #######################################################################
 ## create rebound simulation and predict stability for each system in nsim_list
 
+model = spock.StabilityClassifier()
+
 system_stability_probs = []
 
 for nsim in nsim_list:
@@ -91,16 +84,8 @@ for nsim in nsim_list:
     sim.add(m=m_test, P=P_sort[nsim], e=e_sort[nsim], inc=inc_sort[nsim], pomega=pomega_sort[nsim])
     sim.move_to_com()
     
-    # summary features
-    args = (10000, 1000) # (Norbits, Nout) Keep this fixed
-    summaryfeatures = ressummaryfeaturesxgbv6(sim, args)
-    
-    if features is not None:
-        summaryfeatures = summaryfeatures[features]
-    summaryfeatures = pd.DataFrame([summaryfeatures]) # convert it to the pandas format model expects
-    
     # predict probability
-    probstability = model.predict_proba(summaryfeatures)[:, 1][0]
+    probstability = model.predict(sim, copy=False)
     system_stability_probs.append(probstability)
     
 system_stability_probs = np.array(system_stability_probs)
