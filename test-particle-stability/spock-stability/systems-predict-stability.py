@@ -14,7 +14,6 @@ import rebound
 import matplotlib.pyplot as plt
 import matplotlib
 import random
-# from spock import StabilityClassifier
 import dill
 import sys
 import pandas as pd
@@ -30,9 +29,6 @@ folderpath = '../../../MLstability/'
 model = 'ressummaryfeaturesxgbv6_resonant.pkl'
 
 model, features, featurefolder = dill.load(open(folderpath+'/models/'+model, "rb"))
-
-
-model = StabilityClassifier()
 
 #######################################################################
 ## determine systems to run
