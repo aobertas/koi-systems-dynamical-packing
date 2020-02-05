@@ -13,21 +13,41 @@ __email__ = 'obertas@astro.utoronto.ca'
 # Nsims = ic['Nsims']
 #
 # list of fields:
-# outdir: str(ic['Nsims']) returns the string of the directory location where
+
+# outdir: str(ic['outdir']) returns the string of the directory location where
 #         files are to be saved (note: the str() seems to be necessary)
 # job_pre: str(ic['job_pre') returns the string of the prefix for sunnyvale job name
-# Nbody: number of planets in the system (integer)
-# Nsims: number of simulations in the file (integer)
-# m_star: mass of the star in stellar masses (float)
-# m_planet: mass of the planets in stellar masses (float) (note: equal masses)
-# delta: array of size (Nsims) of initial separations (floats)
-# a: array of size ((Nbody,Nsims)) of initial semimajor axes (floats)
-# f: array of size ((Nbody,Nsims)) of initial true anomalies (floats)
-# tf: maximum integration time in years (float)
-# spo: time steps per orbit of inner planet (float)
-# dt: time step corresponding to period of inner planet divided by spo in REBOUND time (float)
-# archive_flag: whether or not to save simulation to archive at archive_interval intervals (boolean)
-# archive_interval: time in between archive snapshots (float)
+# archive_flag: boolean (True/False) for whether rebound simulation archives are to be saved
+# archive_interval: time interval between archive snapshots (REBOUND time)
+# Nsims: number of simulations to be run
+# m_star: mass of the star (solar masses)
+# m_1: mass of inner planet (solar masses)
+# m_2: mass of outer planet (solar masses)
+# m_test: mass of test particle - note: not a true test particle for simplicity (solar masses)
+# P_ratio: period ratio of outer:inner
+# P_1: period of inner planet (REBOUND time)
+# P_2: period of outer planet (REBOUND time)
+# P_min: minimum period of test particle (REBOUND time)
+# P_max: maximum period of test particle (REBOUND time)
+# P_sort: periods for Nsims test particles, sorted in ascending order (REBOUND time)
+# e_1: eccentricity of inner planet
+# e_2: eccentricity of outer planet
+# e_min: minimum eccentricity of test particle
+# e_max: maximum eccentricity of test particle
+# e_sort: eccentricities for Nsims test particles, sorted in ascending order
+# inc_1: inclination of inner planet (radians)
+# inc_2: inclination of outer planet (radians)
+# inc_min: minimum inclination of test particle (radians)
+# inc_max: maximum inclination of test particle (radians)
+# inc_sort: inclinations for Nsims test particles, sorted in ascending order (radians)
+# pomega_1: longitude of periapsis of inner planet (radians)
+# pomega_2: longitude of periapsis of outer planet (radians)
+# pomega_min: minimum longitude of periapsis of test particle (radians)
+# pomega_max: maximum longitude of periapsis of test particle (radians)
+# pomega_sort: longitudes of periapsis for Nsims test particles, sorted in ascending order (radians)
+# t_max: maximum integration time (orbits)
+# steps_per_orbit: integration time steps per orbit (of inner planet)
+# dt: integration time step (REBOUND time)
 #
 # Written by Alysa Obertas
 
@@ -107,7 +127,7 @@ pomega_sort = np.sort(e_rand) # test particle orbit orientations, sorted in asce
       
 ## save initial conditions to file
 
-np.savez(outfile,outdir=outdir,archive_flag=archive_flag,archive_interval=archive_interval,job_pre=job_pre, \
+np.savez(outfile,outdir=outdir,job_pre=job_pre,archive_flag=archive_flag,archive_interval=archive_interval, \
                  Nsims=Nsims,m_star=m_star,m_1=m_1,m_2=m_2,m_test=m_test, \
                  P_ratio=P_ratio,P_1=P_1,P_2=P_2,P_min=P_min,P_max=P_max,P_sort=P_sort, \
                  e_1=e_1,e_2=e_2,e_min=e_min,e_max=e_max,e_sort=e_sort, \

@@ -1,14 +1,11 @@
 __author__ = 'Alysa Obertas'
 __email__ = 'obertas@astro.utoronto.ca'
 
-# python systems-predict-stability.py nsys first_sim p1 p2 p3
+# python systems-predict-stability.py nsys first_sim
 #
-# predicts stability (for 1e9 orbits) of a 3+ planet system using machine learning
-# method developed by Dan Tamayo
+# predicts stability (for 1e9 orbits) of a 2 planet + test particle system
 #
 # finds probability for nsys systems, starting at first_sim
-# examines triples from the 5 planet systems (p1, p2, p3)
-# e.g. first set of adjacent triples is (1, 2, 3)
 #
 # Written by Alysa Obertas (modified from code written by Dan Tamayo)
 
@@ -17,6 +14,7 @@ import rebound
 import matplotlib.pyplot as plt
 import matplotlib
 import random
+from spock import StabilityClassifier
 import dill
 import sys
 import pandas as pd
@@ -33,6 +31,9 @@ model = 'ressummaryfeaturesxgbv6_resonant.pkl'
 
 model, features, featurefolder = dill.load(open(folderpath+'/models/'+model, "rb"))
 
+
+model = StabilityClassifier()
+
 #######################################################################
 ## determine systems to run
 
@@ -41,54 +42,42 @@ nsys = int(args[1])
 first_sim = int(args[2])
 last_sim = first_sim + nsys - 1
 
-p1 = int(args[3])
-p2 = int(args[4])
-p3 = int(args[5])
+nsim_list = np.arange(first_sim, last_sim+1)
 
-planet_list = [p1-1, p2-1, p3-1]
+print("nsys = %d, first_sim = %d" % (nsys, first_sim))
 
-print('nsys = %d, first_sim = %d, p1 = %d, p2 = %d, p3 = %d' % (nsys, first_sim, p1, p2, p3))
-
-if (first_sim < 16000) and (last_sim < 16000):
-    nsim_list = np.arange(first_sim, last_sim+1)
-    delta_set = 1
-elif (first_sim >= 16000) and (last_sim >= 16000):
-    nsim_list = np.arange(first_sim - 16000, last_sim - 16000 + 1)
-    delta_set = 2
-else:
-    print('Simulations must be contained in the same initial condition file')
-    print('first_sim and first_sim+nsys-1 should both be <16000 or >=16000')
-
-outfile = '/mnt/raid-cita/obertas/github-repos/obertas-2017-systems-2019-ML-paper/\
-ml-stability-prediction/triples/np-binary-files/stability-probs-sims-' + str(first_sim) \
-+ '-to-' + str(last_sim) + '-planets-' + str(p1) + '-' + str(p2) + '-' + str(p3) + '.npz'
+outfile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
+test-particle-stability/spock-stability/np-binary-prediction-files/\
+stability-probs-sims-" + str(first_sim) + "-to-" + str(last_sim) + ".npz"
 
 #######################################################################
 ## read initial condition file
 
-infile_delta_2_to_10 = '/mnt/raid-cita/obertas/github-repos/obertas-2017-systems-2019-ML-paper\
-/obertas-2017-paper-systems/initial_conditions_delta_2_to_10.npz'
-infile_delta_10_to_13 = '/mnt/raid-cita/obertas/github-repos/obertas-2017-systems-2019-ML-paper\
-/obertas-2017-paper-systems/initial_conditions_delta_10_to_13.npz'
+infile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
+test-particle-stability/generate-and-run-systems/initial_conditions.npz"
 
-if delta_set == 1:
-    ic = np.load(infile_delta_2_to_10)
-elif delta_set == 2:
-    ic = np.load(infile_delta_10_to_13)
-else:
-    print('Simulations must be contained in the same initial condition file')
-    print('first_sim and first_sim+nsys-1 should both be <16000 or >=16000')
+ic = np.load(infile)
 
-m_star = ic['m_star'] # mass of star
-m_planet = ic['m_planet'] # mass of planets
-rh = (m_planet/3.) ** (1./3.)
+m_star = ic['m_star'] # mass of star (solar masses)
+m_1 = ic['m_1'] # mass of inner planet (solar masses)
+m_2 = ic['m_2'] # mass of outer planet (solar masses)
+m_test = ic['m_test'] # mass of test particle (solar masses)
 
-Nbody = ic['Nbody'] # number of planets
-year = 2.*np.pi # One year in units where G=1
-tf = ic['tf'] # end time in years
+P_1 = ic['P_1'] # period of inner planet (REBOUND time)
+P_2 = ic['P_2'] # period of outer planet (REBOUND time)
+P_sort = ic['P_sort'] # periods for Nsims test particles, sorted in ascending order (REBOUND time)
 
-a_init = ic['a'] # array containing initial semimajor axis for each delta,planet
-f_init = ic['f'] # array containing intial longitudinal position for each delta, planet, run
+e_1 = ic['e_1'] # eccentricity of inner planet
+e_2 = ic['e_2'] # eccentricity of outer planet
+e_sort = ic['e_sort'] # eccentricities for Nsims test particles, sorted in ascending order
+
+inc_1 = ic['inc_1'] # inclination of inner planet (radians)
+inc_2 = ic['inc_2'] # inclination of outer planet (radians)
+inc_sort = ic['inc_sort'] # inclinations for Nsims test particles, sorted in ascending order (radians)
+
+pomega_1 = ic['pomega_1'] # longitude of periapsis of inner planet (radians)
+pomega_2 = ic['pomega_2'] # longitude of periapsis of outer planet (radians)
+pomega_sort = ic['pomega_sort'] # longitudes of periapsis for Nsims test particles, sorted in ascending order (radians)
 
 #######################################################################
 ## create rebound simulation and predict stability for each system in nsim_list
@@ -101,8 +90,9 @@ for nsim in nsim_list:
     sim = rebound.Simulation()
     sim.add(m=m_star)
 
-    for i in planet_list: # add the planets
-        sim.add(m=m_planet, a=a_init[i,nsim], f=f_init[i,nsim]) #ignore for now: inc=np.random.rand(1)*1e-10, e=np.random.rand(1)*1e-10)
+    sim.add(m=m_1, P=P_1, e=e_1, inc=inc_1, pomega=pomega_1)
+    sim.add(m=m_2, P=P_2, e=e_2, inc=inc_2, pomega=pomega_2)
+    sim.add(m=m_test, P=P_sort[nsim], e=e_sort[nsim], inc=inc_sort[nsim], pomega=pomega_sort[nsim])
     sim.move_to_com()
     
     # summary features
@@ -119,4 +109,4 @@ for nsim in nsim_list:
     
 system_stability_probs = np.array(system_stability_probs)
 
-np.savez(outfile, delta_set=delta_set,nsim_list=nsim_list, probs=system_stability_probs)
+np.savez(outfile, nsim_list=nsim_list, probs=system_stability_probs)
