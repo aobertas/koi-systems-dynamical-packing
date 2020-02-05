@@ -14,7 +14,7 @@ import rebound
 import matplotlib.pyplot as plt
 import matplotlib
 import random
-from spock import StabilityClassifier
+# from spock import StabilityClassifier
 import dill
 import sys
 import pandas as pd
