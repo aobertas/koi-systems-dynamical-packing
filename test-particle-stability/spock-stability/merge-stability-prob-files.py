@@ -21,7 +21,7 @@ infile_dir_name = str(args[2])
 nsys = int(args[3])
 
 infile_prefix = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability/spock-stability/np-binary-prediction-files/" + dir_name + \
+test-particle-stability/spock-stability/np-binary-prediction-files/" + infile_dir_name + \
 "/stability-probs-sims-"
 
 #######################################################################
