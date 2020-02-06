@@ -1,7 +1,7 @@
 __author__ = 'Alysa Obertas'
 __email__ = 'obertas@astro.utoronto.ca'
 
-# python merge-stability-prob-files.py file_name nsys
+# python merge-stability-prob-files.py file_name infile_dir_name nsys
 #
 # merges all system probability numpy files into one single file
 # file is called file_name.npz and nsys is the number of systems
@@ -17,10 +17,12 @@ import sys
 
 args = sys.argv
 outfile = str(args[1])
-nsys = int(args[2])
+infile_dir_name = str(args[2])
+nsys = int(args[3])
 
 infile_prefix = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability/spock-stability/np-binary-prediction-files/stability-probs-sims-"
+test-particle-stability/spock-stability/np-binary-prediction-files/" + dir_name + \
+"/stability-probs-sims-"
 
 #######################################################################
 ## merge numpy binary files
