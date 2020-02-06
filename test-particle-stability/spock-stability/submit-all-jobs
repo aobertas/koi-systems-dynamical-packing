@@ -1,8 +1,8 @@
 #!/bin/bash
 
-## SUBMIT IN BATCHES OF 100
+## SUBMIT IN BATCHES OF 500
 
-for fsim in {0..9900..100}
+for fsim in {0..159500..500}
 do
-	qsub -v nsys=100,first_sim=$fsim sunnyvale-systems-predict-stability-qsub-script
+	qsub -v nsys=500,first_sim=$fsim sunnyvale-systems-predict-stability-qsub-script
 done

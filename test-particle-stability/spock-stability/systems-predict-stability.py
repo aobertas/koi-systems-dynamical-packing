@@ -52,19 +52,19 @@ m_test = ic['m_test'] # mass of test particle (solar masses)
 
 P_1 = ic['P_1'] # period of inner planet (REBOUND time)
 P_2 = ic['P_2'] # period of outer planet (REBOUND time)
-P_sort = ic['P_sort'] # periods for Nsims test particles, sorted in ascending order (REBOUND time)
+P_rand = ic['P_sort'] # periods for Nsims test particles (REBOUND time)
 
 e_1 = ic['e_1'] # eccentricity of inner planet
 e_2 = ic['e_2'] # eccentricity of outer planet
-e_sort = ic['e_sort'] # eccentricities for Nsims test particles, sorted in ascending order
+e_rand = ic['e_sort'] # eccentricities for Nsims test particles
 
 inc_1 = ic['inc_1'] # inclination of inner planet (radians)
 inc_2 = ic['inc_2'] # inclination of outer planet (radians)
-inc_sort = ic['inc_sort'] # inclinations for Nsims test particles, sorted in ascending order (radians)
+inc_rand = ic['inc_sort'] # inclinations for Nsims test particles (radians)
 
 pomega_1 = ic['pomega_1'] # longitude of periapsis of inner planet (radians)
 pomega_2 = ic['pomega_2'] # longitude of periapsis of outer planet (radians)
-pomega_sort = ic['pomega_sort'] # longitudes of periapsis for Nsims test particles, sorted in ascending order (radians)
+pomega_rand = ic['pomega_sort'] # longitudes of periapsis for Nsims test particles (radians)
 
 #######################################################################
 ## create rebound simulation and predict stability for each system in nsim_list
@@ -81,7 +81,7 @@ for nsim in nsim_list:
 
     sim.add(m=m_1, P=P_1, e=e_1, inc=inc_1, pomega=pomega_1)
     sim.add(m=m_2, P=P_2, e=e_2, inc=inc_2, pomega=pomega_2)
-    sim.add(m=m_test, P=P_sort[nsim], e=e_sort[nsim], inc=inc_sort[nsim], pomega=pomega_sort[nsim])
+    sim.add(m=m_test, P=P_rand[nsim], e=e_rand[nsim], inc=inc_rand[nsim], pomega=pomega_rand[nsim])
     sim.move_to_com()
     
     # predict probability

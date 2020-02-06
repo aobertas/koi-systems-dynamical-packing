@@ -29,22 +29,22 @@ __email__ = 'obertas@astro.utoronto.ca'
 # P_2: period of outer planet (REBOUND time)
 # P_min: minimum period of test particle (REBOUND time)
 # P_max: maximum period of test particle (REBOUND time)
-# P_sort: periods for Nsims test particles, sorted in ascending order (REBOUND time)
+# P_rand: periods for Nsims test particles (REBOUND time)
 # e_1: eccentricity of inner planet
 # e_2: eccentricity of outer planet
 # e_min: minimum eccentricity of test particle
 # e_max: maximum eccentricity of test particle
-# e_sort: eccentricities for Nsims test particles, sorted in ascending order
+# e_rand: eccentricities for Nsims test particles
 # inc_1: inclination of inner planet (radians)
 # inc_2: inclination of outer planet (radians)
 # inc_min: minimum inclination of test particle (radians)
 # inc_max: maximum inclination of test particle (radians)
-# inc_sort: inclinations for Nsims test particles, sorted in ascending order (radians)
+# inc_rand: inclinations for Nsims test particles (radians)
 # pomega_1: longitude of periapsis of inner planet (radians)
 # pomega_2: longitude of periapsis of outer planet (radians)
 # pomega_min: minimum longitude of periapsis of test particle (radians)
 # pomega_max: maximum longitude of periapsis of test particle (radians)
-# pomega_sort: longitudes of periapsis for Nsims test particles, sorted in ascending order (radians)
+# pomega_rand: longitudes of periapsis for Nsims test particles (radians)
 # t_max: maximum integration time (orbits)
 # steps_per_orbit: integration time steps per orbit (of inner planet)
 # dt: integration time step (REBOUND time)
@@ -87,7 +87,7 @@ pomega_2 = 100 * golden_ratio * np.pi / 180 # orientation of outer planet orbit 
 outdir = "/mnt/scratch-lustre/obertas/koi-systems-dynamical-packing/test-particle-stability/" # root directory where simulation data files will be saved
 job_pre = "sim"
 
-Nsims = 10000 # number of simulations
+Nsims = 160000 # number of simulations
 
 t_max = 1e9 # maximum integration time (orbits)
 
@@ -106,22 +106,18 @@ m_test = m_earth * 1e-3 # mass of test particle (solar masses)
 P_min = 1.2 * P_1 # lower bound for test particle period (days)
 P_max = P_2 / 1.2 # upper bound for test particle period (days)
 P_rand = np.random.uniform(P_min,P_max,Nsims) # test particle periods (days)
-P_sort = np.sort(P_rand) # test particle periods, sorted in ascending order (days)
 
 e_min = 0.005 # lower bound for test particle eccentricity
 e_max = 0.05 # upper bound for test particle eccentricity
 e_rand = np.random.uniform(e_min,e_max,Nsims) # test particle eccentricities
-e_sort = np.sort(e_rand) # test particle eccentricities, sorted in ascending order
 
 inc_min = -5 * np.pi / 180 # lower bound for test particle inclination (radians)
 inc_max = 5 * np.pi / 180 # upper bound for test particle inclination (radians)
 inc_rand = np.random.uniform(inc_min,inc_max,Nsims) # test particle inclinations (radians)
-inc_sort = np.sort(inc_rand) # test particle inclinations, sorted in ascending order (radians)
 
 pomega_min = 0 # lower bound for test particle orbit orientation (radians)
 pomega_max = 2 * np.pi # upper bound for test particle orbit orientation (radians)
 pomega_rand = np.random.uniform(pomega_min,pomega_max,Nsims) # test particle orbit orientations (radians)
-pomega_sort = np.sort(e_rand) # test particle orbit orientations, sorted in ascending order (radians)
     
 #######################################################################
       
@@ -129,8 +125,8 @@ pomega_sort = np.sort(e_rand) # test particle orbit orientations, sorted in asce
 
 np.savez(outfile,outdir=outdir,job_pre=job_pre,archive_flag=archive_flag,archive_interval=archive_interval, \
                  Nsims=Nsims,m_star=m_star,m_1=m_1,m_2=m_2,m_test=m_test, \
-                 P_ratio=P_ratio,P_1=P_1,P_2=P_2,P_min=P_min,P_max=P_max,P_sort=P_sort, \
-                 e_1=e_1,e_2=e_2,e_min=e_min,e_max=e_max,e_sort=e_sort, \
-                 inc_1=inc_1,inc_2=inc_2,inc_min=inc_min,inc_max=inc_max,inc_sort=inc_sort, \
-                 pomega_1=pomega_1,pomega_2=pomega_2,pomega_min=pomega_min,pomega_max=pomega_max,pomega_sort=pomega_sort, \
+                 P_ratio=P_ratio,P_1=P_1,P_2=P_2,P_min=P_min,P_max=P_max,P_rand=P_rand, \
+                 e_1=e_1,e_2=e_2,e_min=e_min,e_max=e_max,e_rand=e_rand, \
+                 inc_1=inc_1,inc_2=inc_2,inc_min=inc_min,inc_max=inc_max,inc_rand=inc_rand, \
+                 pomega_1=pomega_1,pomega_2=pomega_2,pomega_min=pomega_min,pomega_max=pomega_max,pomega_rand=pomega_rand, \
                  t_max=t_max,steps_per_orbit=steps_per_orbit,dt=dt)
