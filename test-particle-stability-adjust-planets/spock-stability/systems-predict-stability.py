@@ -80,8 +80,8 @@ for nsim in nsim_list:
     sim = rebound.Simulation()
     sim.add(m=m_star)
 
-    sim.add(m=m_1, P=P_1_rand[nsim], e=e_1_rand[nsim], inc=inc_1_rand[nsim], pomega=pomega_1_rand[nsim])
-    sim.add(m=m_2, P=P_2_rand[nsim], e=e_2_rand[nsim], inc=inc_2_rand[nsim], pomega=pomega_2_rand[nsim])
+    sim.add(m=m_1, P=P_1, e=e_1_rand[nsim], inc=inc_1_rand[nsim], pomega=pomega_1_rand[nsim])
+    sim.add(m=m_2, P=P_2, e=e_2_rand[nsim], inc=inc_2_rand[nsim], pomega=pomega_2_rand[nsim])
     if e_test == 0:
         sim.add(m=m_test, P=P_test_rand[nsim], e=e_test, inc=inc_test)
     else:
