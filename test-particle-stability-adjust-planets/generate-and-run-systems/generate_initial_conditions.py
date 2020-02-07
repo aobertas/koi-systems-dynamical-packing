@@ -27,24 +27,30 @@ __email__ = 'obertas@astro.utoronto.ca'
 # P_ratio: period ratio of outer:inner
 # P_1: period of inner planet (REBOUND time)
 # P_2: period of outer planet (REBOUND time)
-# P_min: minimum period of test particle (REBOUND time)
-# P_max: maximum period of test particle (REBOUND time)
-# P_rand: periods for Nsims test particles (REBOUND time)
-# e_1: eccentricity of inner planet
-# e_2: eccentricity of outer planet
-# e_min: minimum eccentricity of test particle
-# e_max: maximum eccentricity of test particle
-# e_rand: eccentricities for Nsims test particles
-# inc_1: inclination of inner planet (radians)
-# inc_2: inclination of outer planet (radians)
-# inc_min: minimum inclination of test particle (radians)
-# inc_max: maximum inclination of test particle (radians)
-# inc_rand: inclinations for Nsims test particles (radians)
-# pomega_1: longitude of periapsis of inner planet (radians)
-# pomega_2: longitude of periapsis of outer planet (radians)
-# pomega_min: minimum longitude of periapsis of test particle (radians)
-# pomega_max: maximum longitude of periapsis of test particle (radians)
-# pomega_rand: longitudes of periapsis for Nsims test particles (radians)
+# P_test_min: minimum period of test particle (REBOUND time)
+# P_test_max: maximum period of test particle (REBOUND time)
+# P_test_rand: periods for Nsims test particles (REBOUND time)
+# e_1_min: lower bound for inner planet eccentricity
+# e_1_max: upper bound for inner planet eccentricity
+# e_1_rand: inner planet eccentricities
+# e_2_min: lower bound for outer planet eccentricity
+# e_2_max: upper bound for outer planet eccentricity
+# e_2_rand: outer planet eccentricities
+# e_test: test particle eccentricity
+# inc_1_min: lower bound for inner planet inclination (radians)
+# inc_1_max: upper bound for inner planet inclination (radians)
+# inc_1_rand: inner planet inclinations (radians)
+# inc_2_min: lower bound for outer planet inclination (radians)
+# inc_2_max: upper bound for outer planet inclination (radians)
+# inc_2_rand: outer planet inclinations (radians)
+# inc_test: test particle inclination (radians)
+# pomega_1_min: lower bound for inner planet orbit orientation (radians)
+# pomega_1_max: upper bound for inner planet orbit orientation (radians)
+# pomega_1_rand: inner planet orbit orientations (radians)
+# pomega_2_min: lower bound for outer planet orbit orientation (radians)
+# pomega_2_max: upper bound for outer planet orbit orientation (radians)
+# pomega_2_rand: outer planet orbit orientations (radians)
+# pomega_test: test particle orbit orientation (radians)
 # t_max: maximum integration time (orbits)
 # steps_per_orbit: integration time steps per orbit (of inner planet)
 # dt: integration time step (REBOUND time)
@@ -138,7 +144,7 @@ pomega_test = 0 # test particle orbit orientation (radians)
 
 np.savez(outfile,outdir=outdir,job_pre=job_pre,archive_flag=archive_flag,archive_interval=archive_interval, \
                  Nsims=Nsims,m_star=m_star,m_1=m_1,m_2=m_2,m_test=m_test, \
-                 P_ratio=P_ratio,P_1=P_1,P_2=P_2,P_test_min=P_test_min,P_test_max=P_test_max,P_rand=P_test_rand, \
+                 P_ratio=P_ratio,P_1=P_1,P_2=P_2,P_test_min=P_test_min,P_test_max=P_test_max,P_test_rand=P_test_rand, \
                  e_1_min=e_1_min,e_1_max=e_1_max,e_2_min=e_2_min,e_2_max=e_2_max, \
                  e_1_rand=e_1_rand,e_2_rand=e_2_rand,e_test=e_test, \
                  inc_1_min=inc_1_min,inc_1_max=inc_1_max,inc_2_min=inc_2_min,inc_2_max=inc_2_max, \
