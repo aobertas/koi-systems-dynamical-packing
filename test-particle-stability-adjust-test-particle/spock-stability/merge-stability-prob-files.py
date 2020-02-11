@@ -40,7 +40,7 @@ full_probs = np.zeros(Nsims)
 
 for first_sim in np.arange(0,Nsims,nsys):
     last_sim = first_sim + nsys - 1
-    infile = infile_prefix + str(first_sim) + "-to-" + str(last_sim) + ".npz"
+    infile = probs_file_prefix + str(first_sim) + "-to-" + str(last_sim) + ".npz"
     data = np.load(infile)
 
     full_probs[first_sim:last_sim+1] = data['probs']
