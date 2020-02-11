@@ -42,7 +42,7 @@ stability-probs-sims-" + str(first_sim) + "-to-" + str(last_sim) + ".npz"
 ## read initial condition file
 
 infile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-adjust-planets/generate-and-run-systems/initial_conditions_" + ic_file + ".npz"
+test-particle-stability-adjust-test-particle/generate-and-run-systems/initial_conditions_" + ic_file + ".npz"
 
 ic = np.load(infile)
 
