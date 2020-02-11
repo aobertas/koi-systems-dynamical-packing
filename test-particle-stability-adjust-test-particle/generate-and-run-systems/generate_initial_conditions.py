@@ -103,21 +103,25 @@ archive_interval = 10000 * dt
 
 m_test = m_earth * 1e-3 # mass of test particle (solar masses)
 
-P_min = 1.2 * P_1 # lower bound for test particle period (days)
-P_max = P_2 / 1.2 # upper bound for test particle period (days)
+P_min = P_1 # lower bound for test particle period (days)
+P_max = P_2 # upper bound for test particle period (days)
 P_rand = np.random.uniform(P_min,P_max,Nsims) # test particle periods (days)
 
-e_min = 0.005 # lower bound for test particle eccentricity
-e_max = 0.05 # upper bound for test particle eccentricity
+e_min = 0 # lower bound for test particle eccentricity
+e_max = 0.1 # upper bound for test particle eccentricity
 e_rand = np.random.uniform(e_min,e_max,Nsims) # test particle eccentricities
 
 inc_min = -5 * np.pi / 180 # lower bound for test particle inclination (radians)
 inc_max = 5 * np.pi / 180 # upper bound for test particle inclination (radians)
 inc_rand = np.random.uniform(inc_min,inc_max,Nsims) # test particle inclinations (radians)
 
-pomega_min = 0 # lower bound for test particle orbit orientation (radians)
-pomega_max = 2 * np.pi # upper bound for test particle orbit orientation (radians)
-pomega_rand = np.random.uniform(pomega_min,pomega_max,Nsims) # test particle orbit orientations (radians)
+pomega_min = 0 # lower bound for test particle longitude of pericentre (radians)
+pomega_max = 2 * np.pi # upper bound for test particle longitude of pericentre (radians)
+pomega_rand = np.random.uniform(pomega_min,pomega_max,Nsims) # test particle orbit longitudes of pericentre (radians)
+
+# node_min = 0 # lower bound for test particle longitude of ascending node (radians)
+# node_max = 2 * np.pi # upper bound for test particle longitude of ascending node (radians)
+# node_rand = np.random.uniform(node_min,node_max,Nsims) # test particle longitudes of ascending node (radians)
     
 #######################################################################
       

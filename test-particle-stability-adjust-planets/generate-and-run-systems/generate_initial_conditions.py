@@ -98,12 +98,12 @@ archive_interval = 10000 * dt
 #######################################################################
 ## varied massive planet parameters
 
-e_1_min = 0.005 # lower bound for inner planet eccentricity
-e_1_max = 0.05 # upper bound for inner planet eccentricity
+e_1_min = 0 # lower bound for inner planet eccentricity
+e_1_max = 0.1 # upper bound for inner planet eccentricity
 e_1_rand = np.random.uniform(e_1_min,e_1_max,Nsims) # inner planet eccentricities
 
-e_2_min = 0.005 # lower bound for outer planet eccentricity
-e_2_max = 0.05 # upper bound for outer planet eccentricity
+e_2_min = 0 # lower bound for outer planet eccentricity
+e_2_max = 0.1 # upper bound for outer planet eccentricity
 e_2_rand = np.random.uniform(e_2_min,e_2_max,Nsims) # outer planet eccentricities
 
 inc_1_min = -5 * np.pi / 180 # lower bound for inner planet inclination (radians)
@@ -127,8 +127,8 @@ pomega_2_rand = np.random.uniform(pomega_2_min,pomega_2_max,Nsims) # outer plane
 
 m_test = m_earth * 1e-3 # mass of test particle (solar masses)
 
-P_test_min = 1.2 * P_1 # lower bound for test particle period (days)
-P_test_max = P_2 / 1.2 # upper bound for test particle period (days)
+P_test_min = P_1 # lower bound for test particle period (days)
+P_test_max = P_2 # upper bound for test particle period (days)
 P_test_rand = np.random.uniform(P_test_min,P_test_max,Nsims) # test particle periods (days)
 
 e_test = 0 # test particle eccentricity
