@@ -1,7 +1,7 @@
 __author__ = 'Alysa Obertas'
 __email__ = 'obertas@astro.utoronto.ca'
 
-# python generate_initial_conditions.py file_name
+# python generate_initial_conditions.py ic_file
 #
 # outputs a numpy compressed binary file (.npz) which contains simulation parameters
 # and the initial conditions of the simulation
@@ -62,7 +62,7 @@ np.random.seed(2) # seed random number generator
 args = sys.argv
 outfile = str(args[1])
 
-outfile = "initial_conditions" + outfile + ".npz" # initial condition file
+outfile = "initial_conditions_" + outfile + ".npz" # initial condition file
 
 golden_ratio = 1.618034
 year = 2 * np.pi # one year in REBOUND time (in units where G=1)

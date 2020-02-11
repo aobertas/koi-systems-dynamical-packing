@@ -1,7 +1,7 @@
 __author__ = 'Alysa Obertas'
 __email__ = 'obertas@astro.utoronto.ca'
 
-# python systems-predict-stability.py nsys first_sim
+# python systems-predict-stability.py ic_file nsys first_sim
 #
 # predicts stability (for 1e9 orbits) of a 2 planet + test particle system
 #
@@ -25,8 +25,9 @@ np.random.seed(2)
 ## determine systems to run
 
 args = sys.argv
-nsys = int(args[1])
-first_sim = int(args[2])
+ic_file = str(args[1])
+nsys = int(args[2])
+first_sim = int(args[3])
 last_sim = first_sim + nsys - 1
 
 nsim_list = np.arange(first_sim, last_sim+1)
@@ -41,7 +42,7 @@ stability-probs-sims-" + str(first_sim) + "-to-" + str(last_sim) + ".npz"
 ## read initial condition file
 
 infile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-adjust-test-particle/generate-and-run-systems/initial_conditions.npz"
+test-particle-stability-adjust-planets/generate-and-run-systems/initial_conditions_" + ic_file + ".npz"
 
 ic = np.load(infile)
 
