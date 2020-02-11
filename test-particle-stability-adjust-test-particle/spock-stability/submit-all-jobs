@@ -11,9 +11,7 @@ while getopts ":a:" opt; do
   esac
 done
 
-
-echo "ic_name is $ic_name"
-# for fsim in {0..159500..500}
-# do
-	#qsub -v ic_file=$ic_name,nsys=500,first_sim=$fsim sunnyvale-systems-predict-stability-qsub-script
-# done
+for fsim in {0..159500..500}
+do
+	qsub -v ic_file=$ic_name,nsys=500,first_sim=$fsim sunnyvale-systems-predict-stability-qsub-script
+done
