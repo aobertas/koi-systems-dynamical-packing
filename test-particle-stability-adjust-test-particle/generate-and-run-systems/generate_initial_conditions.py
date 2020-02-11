@@ -52,6 +52,7 @@ __email__ = 'obertas@astro.utoronto.ca'
 # Written by Alysa Obertas
 
 import numpy as np
+import sys
 
 np.random.seed(2) # seed random number generator
 
