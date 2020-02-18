@@ -75,7 +75,7 @@ np.random.seed(2) # seed random number generator
 args = sys.argv
 outfile = str(args[1])
 
-outfile = "initial_conditions_" + outfile + ".npz" # initial condition file
+outfile = "initial-conditions-" + outfile + ".npz" # initial condition file
 
 golden_ratio = 1.618034
 year = 2 * np.pi # one year in REBOUND time (in units where G=1)
@@ -96,7 +96,7 @@ P_2 = P_1 * P_ratio # orbit period of outer planet (days)
 #######################################################################
 ## simulation parameters
 
-outdir = "/mnt/scratch-lustre/obertas/koi-systems-dynamical-packing/test-particle-stability-adjust-planets/" # root directory where simulation data files will be saved
+outdir = "/mnt/scratch-lustre/obertas/koi-systems-dynamical-packing/test-particle-stability-test-Omega/" # root directory where simulation data files will be saved
 job_pre = "sim"
 
 Nsims = 160000 # number of simulations

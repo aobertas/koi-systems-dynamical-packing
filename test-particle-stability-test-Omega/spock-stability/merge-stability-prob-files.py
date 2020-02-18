@@ -22,14 +22,14 @@ probs_dir_name = str(args[3])
 nsys = int(args[4])
 
 probs_file_prefix = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-adjust-planets/spock-stability/np-binary-prediction-files/" + probs_dir_name + \
+test-particle-stability-test-Omega/spock-stability/np-binary-prediction-files/" + probs_dir_name + \
 "/stability-probs-sims-"
 
 #######################################################################
 ## merge numpy binary files
 
 infile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-adjust-planets/generate-and-run-systems/initial_conditions_" + ic_file + ".npz"
+test-particle-stability-test-Omega/generate-and-run-systems/initial-conditions-" + ic_file + ".npz"
 
 ic = np.load(infile)
 
