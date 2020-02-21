@@ -17,5 +17,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/python/3.6.4/lib
 cd generate-and-run-systems
 python generate_initial_conditions.py $ic_name
 cd ../spock-stability
+mkdir job-files
+mkdir np-binary-probability-files
 mkdir job-files/$ic_name
 mkdir np-binary-probability-files/$ic_name

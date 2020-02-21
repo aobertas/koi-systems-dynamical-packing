@@ -35,14 +35,14 @@ nsim_list = np.arange(first_sim, last_sim+1)
 print("nsys = %d, first_sim = %d" % (nsys, first_sim))
 
 outfile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-test-Omega/spock-stability/np-binary-probability-files/"\
+test-particle-stability-delta-10/spock-stability/np-binary-probability-files/"\
 + ic_file + "/stability-probs-sims-" + str(first_sim) + "-to-" + str(last_sim) + ".npz"
 
 #######################################################################
 ## read initial condition file
 
 infile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-test-Omega/generate-and-run-systems/initial-conditions-" + ic_file + ".npz"
+test-particle-stability-delta-10/generate-and-run-systems/initial-conditions-" + ic_file + ".npz"
 
 ic = np.load(infile)
 
@@ -85,9 +85,9 @@ for nsim in nsim_list:
     sim = rebound.Simulation()
     sim.add(m=m_star)
 
-    sim.add(m=m_1, P=P_1, e=e_1_rand[nsim], inc=inc_1_rand[nsim], pomega=pomega_1_rand[nsim], Omega=Omega_1_rand[nsim])
-    sim.add(m=m_2, P=P_2, e=e_2_rand[nsim], inc=inc_2_rand[nsim], pomega=pomega_2_rand[nsim], Omega=Omega_2_rand[nsim])
-    sim.add(m=m_test, P=P_test_rand[nsim], e=e_test, inc=inc_test, pomega=pomega_test, Omega=Omega_test)
+    sim.add(m=m_1, P=P_1, e=e_1_rand[nsim], inc=inc_1_rand[nsim], pomega=pomega_1_rand[nsim])
+    sim.add(m=m_2, P=P_2, e=e_2_rand[nsim], inc=inc_2_rand[nsim], pomega=pomega_2_rand[nsim])
+    sim.add(m=m_test, P=P_test_rand[nsim], e=e_test, inc=inc_test, pomega=pomega_test)
     sim.move_to_com()
     
     # predict probability
