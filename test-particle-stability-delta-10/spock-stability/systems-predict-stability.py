@@ -35,8 +35,8 @@ nsim_list = np.arange(first_sim, last_sim+1)
 print("nsys = %d, first_sim = %d" % (nsys, first_sim))
 
 outfile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-test-Omega/spock-stability/np-binary-prediction-files/\
-stability-probs-sims-" + str(first_sim) + "-to-" + str(last_sim) + ".npz"
+test-particle-stability-test-Omega/spock-stability/np-binary-prediction-files/"\
++ ic_file + "/stability-probs-sims-" + str(first_sim) + "-to-" + str(last_sim) + ".npz"
 
 #######################################################################
 ## read initial condition file

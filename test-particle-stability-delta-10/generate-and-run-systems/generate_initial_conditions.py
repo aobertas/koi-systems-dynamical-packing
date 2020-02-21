@@ -89,7 +89,7 @@ m_earth = 3.0035e-6 # mass of earth (solar masses)
 m_1 = 3 * m_earth # mass of inner planet (solar masses)
 m_2 = 7 * m_earth # mass of outer planet (solar masses)
 
-P_ratio = 1.3 * golden_ratio
+P_ratio = 1.383
 P_1 = 10 * day # orbit period of inner planet (days)
 P_2 = P_1 * P_ratio # orbit period of outer planet (days)
 
@@ -136,14 +136,6 @@ pomega_1_rand = np.random.uniform(pomega_1_min,pomega_1_max,Nsims) # inner plane
 pomega_2_min = 0 # lower bound for outer planet longitude of pericentre (radians)
 pomega_2_max = 2 * np.pi # upper bound for outer planet longitude of pericentre (radians)
 pomega_2_rand = np.random.uniform(pomega_2_min,pomega_2_max,Nsims) # outer planet longitudes of pericentre (radians)
-
-Omega_1_min = 0 # lower bound for inner planet longitude of ascending node (radians)
-Omega_1_max = 2 * np.pi # upper bound for inner planet longitude of ascending node (radians)
-Omega_1_rand = np.random.uniform(Omega_1_min,Omega_1_max,Nsims) # inner planet longitudes of ascending node (radians)
-
-Omega_2_min = 0 # lower bound for outer planet longitude of ascending node (radians)
-Omega_2_max = 2 * np.pi # upper bound for outer planet longitude of ascending node (radians)
-Omega_2_rand = np.random.uniform(Omega_2_min,Omega_2_max,Nsims) # outer planet longitudes of ascending node (radians)
 
 #######################################################################
 ## test particle parameters
