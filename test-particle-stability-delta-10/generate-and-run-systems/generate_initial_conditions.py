@@ -51,13 +51,6 @@ __email__ = 'obertas@astro.utoronto.ca'
 # pomega_2_max: upper bound for outer planet longitude of pericentre (radians)
 # pomega_2_rand: outer planet longitudes of pericentre (radians)
 # pomega_test: test particle longitude of pericentre (radians)
-# Omega_1_min: lower bound for inner planet longitude of ascending node (radians)
-# Omega_1_max: upper bound for inner planet longitude of ascending node (radians)
-# Omega_1_rand: inner planet longitudes of ascending node (radians)
-# Omega_2_min: lower bound for outer planet longitude of ascending node (radians)
-# Omega_2_max: upper bound for outer planet longitude of ascending node (radians)
-# Omega_2_rand: outer planet longitudes of ascending node (radians)
-# Omega_test: test particle longitude of ascending node (radians)
 # t_max: maximum integration time (orbits)
 # steps_per_orbit: integration time steps per orbit (of inner planet)
 # dt: integration time step (REBOUND time)
@@ -152,8 +145,6 @@ inc_test = 0 # test particle inclination (radians)
 
 # note: pomega_test is set for the sake of consistency, but it is UNDEFINED for a circular orbit
 pomega_test = 0 # test particle longitude of pericentre (radians)
-
-Omega_test = 0 # test particle longitude of ascending node (radians)
     
 #######################################################################
       
@@ -168,6 +159,4 @@ np.savez(outfile,outdir=outdir,job_pre=job_pre,archive_flag=archive_flag,archive
                  inc_1_rand=inc_1_rand,inc_2_rand=inc_2_rand,inc_test=inc_test, \
                  pomega_1_min=pomega_1_min,pomega_1_max=pomega_1_max,pomega_2_min=pomega_2_min,pomega_2_max=pomega_2_max, \
                  pomega_1_rand=pomega_1_rand,pomega_2_rand=pomega_2_rand,pomega_test=pomega_test, \
-                 Omega_1_min=Omega_1_min,Omega_1_max=Omega_1_max,Omega_2_min=Omega_2_min,Omega_2_max=Omega_2_max, \
-                 Omega_1_rand=Omega_1_rand,Omega_2_rand=Omega_2_rand,Omega_test=Omega_test, \
                  t_max=t_max,steps_per_orbit=steps_per_orbit,dt=dt)
