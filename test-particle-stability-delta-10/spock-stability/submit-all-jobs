@@ -1,0 +1,19 @@
+#!/bin/bash
+
+## SUBMIT IN BATCHES OF 500
+
+while getopts ":a:n:" opt; do
+  case $opt in
+    a) ic_name="$OPTARG"
+    ;;
+    n) n="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    ;;
+  esac
+done
+
+for fsim in {0..159500..500}
+do
+    qsub -v ic_file=$ic_name,nsys=$n,first_sim=$fsim sunnyvale-systems-predict-stability-qsub-script
+done
