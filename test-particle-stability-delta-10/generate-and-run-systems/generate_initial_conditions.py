@@ -82,14 +82,17 @@ m_earth = 3.0035e-6 # mass of earth (solar masses)
 m_1 = 3 * m_earth # mass of inner planet (solar masses)
 m_2 = 7 * m_earth # mass of outer planet (solar masses)
 
-P_ratio = 1.383
+delta = 10
+X = 0.5 * ((m_1 + m_2) / 3) ** (1/3)
+
+P_ratio = ((1 + delta * X) / (1 - delta * X)) ** (3/2)
 P_1 = 10 * day # orbit period of inner planet (days)
 P_2 = P_1 * P_ratio # orbit period of outer planet (days)
 
 #######################################################################
 ## simulation parameters
 
-outdir = "/mnt/scratch-lustre/obertas/koi-systems-dynamical-packing/test-particle-stability-test-Omega/" # root directory where simulation data files will be saved
+outdir = "/mnt/scratch-lustre/obertas/koi-systems-dynamical-packing/test-particle-stability-delta-10/" # root directory where simulation data files will be saved
 job_pre = "sim"
 
 Nsims = 160000 # number of simulations

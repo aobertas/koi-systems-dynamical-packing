@@ -65,12 +65,7 @@ inc_test = ic['inc_test'] # test particle inclination (radians)
 
 pomega_1_rand = ic['pomega_1_rand'] # inner planet longitude of pericentre (radians)
 pomega_2_rand = ic['pomega_2_rand'] # outer planet longitude of pericentre (radians)
-# note: pomega_test is set for the sake of consistency, but it is UNDEFINED for a circular orbit
 pomega_test = ic['pomega_test'] # test particle longitude of pericentre (radians)
-
-Omega_1_rand = ic['Omega_1_rand'] # inner planet longitude of ascending node (radians)
-Omega_2_rand = ic['Omega_2_rand'] # outer planet longitude of ascending node (radians)
-Omega_test = ic['Omega_test'] # test particle longitude of ascending node (radians)
 
 #######################################################################
 ## create rebound simulation and predict stability for each system in nsim_list
