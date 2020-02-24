@@ -79,8 +79,8 @@ day = year / 365 # one day in REBOUND time (in units where G=1)
 
 m_star = 1.0 # mass of star (solar masses)
 m_earth = 3.0035e-6 # mass of earth (solar masses)
-m_1 = 3 * m_earth # mass of inner planet (solar masses)
-m_2 = 3 * m_earth # mass of outer planet (solar masses)
+m_1 = 7 * m_earth # mass of inner planet (solar masses)
+m_2 = 7 * m_earth # mass of outer planet (solar masses)
 
 delta = 10
 X = 0.5 * ((m_1 + m_2) / 3) ** (1/3)
