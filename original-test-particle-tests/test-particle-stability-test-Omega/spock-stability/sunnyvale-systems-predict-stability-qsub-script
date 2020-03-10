@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -r n
+#PBS -j oe
+#PBS -q workq
+#PBS -l walltime=5:00:00
+#PBS -N ml-predict-fsim-$first_sim-nsys-$nsys
+# EVERYTHING ABOVE THIS COMMENT IS NECESSARY, SHOULD ONLY CHANGE nodes,ppn,walltime and my_job_name VALUES
+
+# example for submitting to sunnyvale:
+# qsub -v nsys=10,first_sim=0 sunnyvale-systems-predict-stability-qsub-script
+cd $PBS_O_WORKDIR
+module load gcc/7.3.0
+source /mnt/raid-cita/obertas/opt/python/venv-py-3.6.4-rebound-3.10.1/bin/activate
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/python/3.6.4/lib
+python systems-predict-stability.py $ic_file $nsys $first_sim
