@@ -34,6 +34,8 @@ nsim_list = np.arange(first_sim, last_sim+1)
 
 print("nsys = %d, first_sim = %d" % (nsys, first_sim))
 
+print(nsim_list)
+
 outfile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
 two-planet-sample-param-space/spock-stability/np-binary-probability-files/"\
 + ic_file + "/stability-probs-sims-" + str(first_sim) + "-to-" + str(last_sim) + ".npz"
@@ -83,7 +85,7 @@ for nsim in nsim_list:
 
     for i in range(N_planets):
         print(nsim, i)
-        sim.add(m=m_planets[i], P=P_planets[i], e=e_rand[nsim, i], inc=inc_rand[nsim, i], \
+        sim.add(m=m_planets[nsim, i], P=P_planets[nsim, i], e=e_rand[nsim, i], inc=inc_rand[nsim, i], \
                 pomega=pomega_rand[nsim, i], f=f_rand[nsim, i])
     sim.add(m=m_test, P=P_test_rand[nsim], e=e_test, inc=inc_test, pomega=pomega_test, f=f_test)
     sim.move_to_com()
