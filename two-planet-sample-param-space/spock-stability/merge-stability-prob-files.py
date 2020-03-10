@@ -17,12 +17,12 @@ import sys
 
 args = sys.argv
 infile = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-arbitrary-planets/generate-and-run-systems/initial-conditions-" + str(args[1]) + ".npz"
+two-planet-sample-param-space/generate-and-run-systems/initial-conditions-" + str(args[1]) + ".npz"
 outfile = "probs-all-" + str(args[2]) + ".npz"
 nsys = int(args[3])
 
 probs_file_prefix = "/mnt/raid-cita/obertas/github-repos/koi-systems-dynamical-packing/\
-test-particle-stability-arbitrary-planets/spock-stability/np-binary-probability-files/"\
+two-planet-sample-param-space/spock-stability/np-binary-probability-files/"\
 + ic_file + "/stability-probs-sims-"
 
 #######################################################################
