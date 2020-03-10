@@ -83,6 +83,9 @@ m_planets = np.random.uniform(1, 10, (Nsims, N_planets))
 delta = np.random.uniform(10, 30, Nsims)
 
 X = 0.5 * ((m_planets[:,0] + m_planets[:,1]) / 3) ** (1/3)
+
+print(np.shape(delta), np.shape(X))
+
 P_ratio = ((1 + delta * X) / (1 - delta * X)) ** (3/2)
 
 P_1 = 10 * day # orbit period of inner planet (REBOUND time)
