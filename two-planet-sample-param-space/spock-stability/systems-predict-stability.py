@@ -82,6 +82,7 @@ for nsim in nsim_list:
     sim.add(m=m_star)
 
     for i in range(N_planets):
+        print(nsim, i)
         sim.add(m=m_planets[i], P=P_planets[i], e=e_rand[nsim, i], inc=inc_rand[nsim, i], \
                 pomega=pomega_rand[nsim, i], f=f_rand[nsim, i])
     sim.add(m=m_test, P=P_test_rand[nsim], e=e_test, inc=inc_test, pomega=pomega_test, f=f_test)
