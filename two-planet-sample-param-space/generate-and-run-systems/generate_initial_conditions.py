@@ -69,7 +69,7 @@ golden_ratio = 1.618034
 year = 2 * np.pi # one year in REBOUND time (in units where G=1)
 day = year / 365 # one day in REBOUND time (in units where G=1)
 
-Nsims = 1000 # number of simulations
+Nsims = 320000 # number of simulations
 
 #######################################################################
 ## fixed system/massive planet parameters
