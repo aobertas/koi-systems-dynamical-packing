@@ -69,7 +69,7 @@ golden_ratio = 1.618034
 year = 2 * np.pi # one year in REBOUND time (in units where G=1)
 day = year / 365 # one day in REBOUND time (in units where G=1)
 
-Nsims = 100 # number of simulations
+Nsims = 10 # number of simulations
 
 #######################################################################
 ## fixed system/massive planet parameters
@@ -78,18 +78,16 @@ N_planets = 2 # number of massive planets
 
 m_star = 1.0 # mass of star (solar masses)
 m_earth = 3.0035e-6 # mass of earth (solar masses)
-m_planets = np.random.uniform(1, 10, (Nsims, N_planets))
+m_planets = m_earth * np.random.uniform(1, 10, (Nsims, N_planets))
 
 delta = np.random.uniform(10, 30, Nsims)
 
 X = 0.5 * ((m_planets[:,0] + m_planets[:,1]) / 3) ** (1/3)
 
-print(np.shape(delta), np.shape(X))
-
 P_ratio = ((1 + delta * X) / (1 - delta * X)) ** (3/2)
 
 P_1 = 10 * day # orbit period of inner planet (REBOUND time)
-P_planets = np.vstack(np.ones(P_1, Nsims), P_ratio * P_1).T # orbit periods of planets (REBOUND time)
+P_planets = np.vstack((P_1 * np.ones(Nsims), P_ratio * P_1)).T # orbit periods of planets (REBOUND time)
 
 #######################################################################
 ## simulation parameters
@@ -113,9 +111,9 @@ m_test = m_earth * 1e-3 # mass of test particle (solar masses)
 
 test_particle_position = 0 # placement of test particle; 0 would be between planets 1 and 2, 1 between 2 and 3, etc.
 
-P_test_min = P_planets[test_particle_position] # lower bound for test particle period (days)
-P_test_max = P_planets[test_particle_position+1] # upper bound for test particle period (days)
-P_test_rand = np.random.uniform(P_test_min,P_test_max,Nsims) # test particle periods (days)
+P_test_min = P_planets[:, test_particle_position] # lower bound for test particle period (days)
+P_test_max = P_planets[:, test_particle_position+1] # upper bound for test particle period (days)
+P_test_rand = np.random.uniform(P_test_min,P_test_max, Nsims) # test particle periods (days)
 
 e_test = 0 # test particle eccentricity
 
@@ -140,14 +138,9 @@ f_min = 0 # lower bound for massive planets' initial position (radians)
 f_max = 2 * np.pi # upper bound for massive planets' initial position (radians)
 f_rand = np.random.uniform(f_min, f_max, (Nsims, N_planets)) # massive planets' initial positions (radians)
 
-e_rand = np.zeros((Nsims, N_planets))
-e_min = 0 # lower bound for massive planets' orbital eccentricity
-for i in range(Nsims):
-    e_1_max = (P_test_rand[i]/P_1)**(2/3) - 1
-    e_2_max = 1 - (P_test_rand[i]/(P_ratio[i] * P_1))**(2/3)
-
-    e_rand[i, 0] = np.random.uniform(e_min, e_1_max)
-    e_rand[i, 1] = np.random.uniform(e_min, e_2_max)
+e_min = np.zeros((Nsims, N_planets)) # lower bound for massive planets' orbital eccentricity
+e_max = np.vstack(((P_test_rand/P_1)**(2/3) - 1, 1 - (P_test_rand/(P_ratio * P_1))**(2/3))).T # upper bound for massive planets' orbital eccentricity
+e_rand = np.random.uniform(e_min, e_max, (Nsims, N_planets)) # massive planets' orbital eccentricities
     
 #######################################################################
       
@@ -156,7 +149,7 @@ for i in range(Nsims):
 np.savez(outfile,outdir=outdir,job_pre=job_pre,archive_flag=archive_flag,archive_interval=archive_interval, \
                  Nsims=Nsims,N_planets=N_planets,test_particle_position=test_particle_position, \
                  m_star=m_star,m_planets=m_planets,m_test=m_test, \
-                 P_1=P_1,P_ratios=P_ratios,P_planets=P_planets,P_test_min=P_test_min, \
+                 P_1=P_1,P_ratio=P_ratio,P_planets=P_planets,P_test_min=P_test_min, \
                  P_test_max=P_test_max,P_test_rand=P_test_rand, \
                  e_min=e_min,e_max=e_max,e_rand=e_rand,e_test=e_test, \
                  inc_min=inc_min,inc_max=inc_max,inc_rand=inc_rand,inc_test=inc_test, \
