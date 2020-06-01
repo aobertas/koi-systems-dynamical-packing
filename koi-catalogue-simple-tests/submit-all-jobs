@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for f in simulation-archives/*
+do
+    qsub -v filename=$f sunnyvale-qsub-script
+done
