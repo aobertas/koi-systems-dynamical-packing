@@ -1,6 +1,9 @@
 #!/bin/bash
 
+iter=0
+
 for f in simulation-archives/*
 do
-    qsub -v filename=$f sunnyvale-qsub-script
+    qsub -v filename=$f,i=$iter sunnyvale-qsub-script
+    ((iter++))
 done
