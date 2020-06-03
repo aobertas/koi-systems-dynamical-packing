@@ -11,6 +11,6 @@
 # qsub -v nsys=10,first_sim=0 sunnyvale-systems-predict-stability-qsub-script
 cd $PBS_O_WORKDIR
 module load gcc/7.3.0
-source /mnt/raid-cita/obertas/opt/python/venv-py-3.6.4-rebound-3.10.1/bin/activate
+source /mnt/raid-cita/obertas/opt/python/venv-3.6.4-june-2020/bin/activate
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/python/3.6.4/lib
 python run_system.py $filename
