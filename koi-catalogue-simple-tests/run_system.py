@@ -25,10 +25,10 @@ def run_sim(filename):
 
     P = sim.particles[1].P
 
-    sim.automateSimulationArchive(filename, interval=1.e6*P)
+    sim.automateSimulationArchive(filename, interval=1.e3*P)
 
     try:
-        sim.integrate(1.e9*P, exact_finish_time=0)
+        sim.integrate(1.e6*P, exact_finish_time=0)
     except rebound.Collision: 
         sim.simulationarchive_snapshot(filename)
 
