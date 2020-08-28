@@ -2,7 +2,7 @@
 
 iter=0
 
-for f in integrated-simulation-archives/*
+for f in integrated-simulation-archives/1e9-orbits/*
 do
     qsub -v filename=$f,i=$iter sunnyvale-qsub-script
     ((iter++))
