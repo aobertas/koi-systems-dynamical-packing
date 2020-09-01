@@ -29,7 +29,9 @@ def run_sim(filename):
 
     try:
         sim.integrate(1.e9*P, exact_finish_time=0)
-    except (rebound.Collision or rebound.Escape): 
+    except rebound.Collision: 
+        sim.simulationarchive_snapshot(filename)
+    except rebound.Escape:
         sim.simulationarchive_snapshot(filename)
 
 #######################################################################
