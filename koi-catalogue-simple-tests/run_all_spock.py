@@ -1,7 +1,7 @@
 __author__ = 'Alysa Obertas'
 __email__ = 'obertas@astro.utoronto.ca'
 
-# python run_simulation.py dirname outfile
+# python run_all_spock.py dirname outfile
 #
 # run REBOUND simulation with initial condition determined by nsim
 # won't work unless make_all_dirs.py has been run
