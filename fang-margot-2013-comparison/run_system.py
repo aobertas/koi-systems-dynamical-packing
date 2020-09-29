@@ -13,7 +13,7 @@ import sys
 
 def run_sim(filename, inttype):
     sa = rebound.SimulationArchive(filename)
-    sim = sa[0]
+    sim = sa[-1]
     sim.integrator_synchronize() # need to manually sinchronize because safe_mode = 0
 
     if inttype == "year":
@@ -23,7 +23,7 @@ def run_sim(filename, inttype):
         sim.automateSimulationArchive(filename, interval=1.e5*year)
 
         try:
-            sim.integrate(1.e8*year, exact_finish_time=0)
+            sim.integrate(sim.t + 5.e6*year, exact_finish_time=0)
         except rebound.Collision: 
             sim.simulationarchive_snapshot(filename)
         except rebound.Escape:
