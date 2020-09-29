@@ -2,10 +2,11 @@
 
 iter=0
 
-# for f in simulation-archives/integrated-archives/1e9-orbits/*
-for f in simulation-archives/integrated-archives/1e8-years/*
+# for f in simulation-archives/koi-gaia/integrated-archives/1e9-orbits/*
+# for f in simulation-archives/koi-gaia/integrated-archives/1e8-years/*
+for f in simulation-archives/q1-q6/integrated-archives/1e9-orbits/*
 do
-    # qsub -v filename=$f,inttype="orbit",i=$iter sunnyvale-qsub-script
-    qsub -v filename=$f,inttype="year",i=$iter sunnyvale-qsub-script
+    qsub -v filename=$f,inttype="orbit",i=$iter sunnyvale-qsub-script
+    # qsub -v filename=$f,inttype="year",i=$iter sunnyvale-qsub-script
     ((iter++))
 done
