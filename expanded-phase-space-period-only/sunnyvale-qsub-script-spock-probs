@@ -4,11 +4,11 @@
 #PBS -j oe
 #PBS -q workq
 #PBS -l walltime=48:00:00
-#PBS -N spock-probs
+#PBS -N spock-probs-$i
 # EVERYTHING ABOVE THIS COMMENT IS NECESSARY, SHOULD ONLY CHANGE nodes,ppn,walltime and my_job_name VALUES
 
 # example for submitting to sunnyvale:
-# qsub -v dirname="spock-simulation-archives/",outfile="spock-probs",start=0,n=1000 sunnyvale-qsub-script-spock-probs
+# qsub -v dirname="spock-simulation-archives/",outfile="spock-probs",start=0,n=1000,i=20 sunnyvale-qsub-script-spock-probs
 cd $PBS_O_WORKDIR
 module load gcc/7.3.0
 source /mnt/raid-cita/obertas/opt/python/venv-3.6.4-aug-2020/bin/activate
