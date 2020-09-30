@@ -29,9 +29,19 @@ def run_sim(dirname, outfile):
 
         sa = rebound.SimulationArchive(filename)
         sim = sa[-1]
-    
-        if sim.t < 1e8 * year:
-            resubmit_sys_list.append(filename)
+
+        ps = sim.particles[1:]
+
+        distances = np.array([p.d for p in ps])
+
+        if np.all(distances < sim.exit_max_distance):
+            close_encounters = 0
+            for p in ps:
+                spacing = np.array([np.sqrt((p.x - p2.x) ** 2 + (p.y - p2.y) ** 2) for p2 in ps])
+                close_encounters = close_encounters + np.sum(spacing[spacing > 0] <= p.r)
+            if close_encounters == 0:
+                if sim.t < 1e8 * year:
+                    resubmit_sys_list.append(filename)
 
     np.savetxt(outfile, np.array(resubmit_sys_list), fmt="%s")
 
