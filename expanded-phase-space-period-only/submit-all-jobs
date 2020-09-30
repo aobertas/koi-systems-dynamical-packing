@@ -1,0 +1,10 @@
+#!/bin/bash
+
+n_sys=1000
+iter=0
+
+for start in {0..91000..n_sys}
+do
+    qsub -v dirname="simulation-archives/original-archives/",outfile="spock-probs",start=$start,n=$n_sys sunnyvale-qsub-script-spock-probs
+    ((iter++))
+done
