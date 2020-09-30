@@ -1,10 +1,9 @@
 #!/bin/bash
 
-n_sys=1000
 iter=0
 
-for start in {0..91000..n_sys}
+for start in {0..91000..1000}
 do
-    qsub -v dirname="simulation-archives/original-archives/",outfile="spock-probs",start=$start,n=$n_sys,i=$iter sunnyvale-qsub-script-spock-probs
+    qsub -v dirname="simulation-archives/original-archives/",outfile="spock-probs",start=$start,n=1000,i=$iter sunnyvale-qsub-script-spock-probs
     ((iter++))
 done
