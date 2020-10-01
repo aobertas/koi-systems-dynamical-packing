@@ -39,7 +39,7 @@ def run_sim(dirname, outfile, start, n):
         system_stability_probs.append(probstability)
 
     system_stability_probs = np.array(system_stability_probs)
-    np.savez(outfile + str(star) + ".npz", identifier_list=identifier_list, probs=system_stability_probs)
+    np.savez(outfile + str(start) + ".npz", identifier_list=identifier_list, probs=system_stability_probs)
 
 #######################################################################
 ## execute simulation
