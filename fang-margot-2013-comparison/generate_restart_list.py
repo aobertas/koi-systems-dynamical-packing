@@ -37,8 +37,9 @@ def run_sim(dirname, outfile):
         if np.all(distances < sim.exit_max_distance):
             close_encounters = 0
             for p in ps:
-                spacing = np.array([np.sqrt((p.x - p2.x) ** 2 + (p.y - p2.y) ** 2) for p2 in ps])
-                close_encounters = close_encounters + np.sum(spacing[spacing > 0] <= p.r)
+                spacing = np.array([np.sqrt((p.x - p2.x) ** 2 + (p.y - p2.y) ** 2 + (p.z - p2.z) ** 2) for p2 in ps])
+                rsum = np.array([p.r + p2.r for p2 in ps])
+                close_encounters = close_encounters + np.sum(spacing[spacing > 0] < rsum[spacing > 0])
             if close_encounters == 0:
                 if sim.t < 1e8 * year:
                     resubmit_sys_list.append(filename)
