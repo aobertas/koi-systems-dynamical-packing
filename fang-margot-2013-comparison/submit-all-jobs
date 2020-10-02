@@ -9,7 +9,7 @@ iter=0
 #     ((iter++))
 # done
 
-input="first-run.txt"
+input="koi-gaia-initial.txt"
 
 while IFS= read -r f
 do
