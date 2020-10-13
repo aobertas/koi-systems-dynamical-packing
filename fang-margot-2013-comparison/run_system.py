@@ -26,8 +26,10 @@ def run_sim(filename, inttype):
             sim.integrate(sim.t + 5.e6*year, exact_finish_time=0)
         except rebound.Collision: 
             sim.simulationarchive_snapshot(filename)
+            print("Collision")
         except rebound.Escape:
             sim.simulationarchive_snapshot(filename)
+            print("Escape")
     elif inttype == "orbit":
         P = sim.particles[1].P
 
