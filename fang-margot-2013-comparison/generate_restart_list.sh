@@ -14,6 +14,7 @@ do
     else
         iter=$f2
         echo b #$f1 $f2 $iter
+        ((iter++))
     fi
     # if [ $f1 == $iter ]
     # then
