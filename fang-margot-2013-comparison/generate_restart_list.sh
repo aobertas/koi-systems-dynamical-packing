@@ -9,15 +9,13 @@ while IFS= read -r f1 <&3 && read -r f2 <&4
 do
     if [ $iter == $f2 ]
     then
-        echo a #$f1 $f2 $iter
+        echo a $f1 $f2 $iter
         ((iter++))
     else
+        echo b $f1 $f2 $iter
         iter=$f2
-        echo b #$f1 $f2 $iter
+        # echo b $f1 $f2 $iter
         ((iter++))
     fi
-    # if [ $f1 == $iter ]
-    # then
-        # echo $f2 $iter
-    # fi
+
 done 3<$input1 4<$input2
