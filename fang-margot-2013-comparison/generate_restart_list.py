@@ -14,9 +14,9 @@ with open(file1, "r") as f1:
                 archive_name = f1.readline()
                 linenum = f2.readline()
 
-                print(archive_name, linenum)
+                print(linenum)
 
-                if linenum == i:
-                    of.write(str(archive_name) + "\n")
-                else:
-                    f1.readline()
+                # if linenum == i:
+                #     of.write(str(archive_name) + "\n")
+                # else:
+                #     f1.readline()
