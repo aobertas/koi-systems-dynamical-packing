@@ -13,13 +13,13 @@ with open(file1, "r") as f1:
     with open(file2, "r") as f2:
         with open(output, "a") as of:
             while i < 920:
-                archive_name = f1.readline().strip()
+                archive_name = f1.readline()
                 linenum = int(f2.readline().strip())
 
                 while i <= linenum:
 
                     print(archive_name, linenum, i)
 
-                    archive_name = f1.readline().strip()
+                    archive_name = f1.readline()
                     # of.write(str(archive_name) + "\n")
                     i += 1
