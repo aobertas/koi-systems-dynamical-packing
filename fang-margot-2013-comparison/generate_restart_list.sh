@@ -12,8 +12,8 @@ do
         echo $f1 $f2 $iter
         ((iter++))
     else
-        echo $f1 $f2 $iter
         iter=$f2
+        echo $f1 $f2 $iter
     fi
     # if [ $f1 == $iter ]
     # then
