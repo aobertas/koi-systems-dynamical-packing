@@ -19,18 +19,8 @@ with open(file2, "r") as f:
 file1_data = np.array(file1_data)
 file2_data = np.array([int(s.rstrip('\n')) for s in file2_data])
 
-print(file1_data[0:10], file2_data[0:10], file1_data[file2_data[0:10]])
+output_data = file1_data[file2_data]
 
-# with open(file2, "r") as f2:
-#         with open(output, "a") as of:
-#             while i < 20:
-#                 archive_name = f1.readline()
-#                 linenum = int(f2.readline().strip())
-
-#                 while i <= linenum:
-
-#                     print(archive_name, linenum, i)
-
-#                     archive_name = f1.readline()
-#                     # of.write(str(archive_name) + "\n")
-#                     i += 1
+with open(output, "a") as f:
+    for line in output_data:
+        f.write(line)
