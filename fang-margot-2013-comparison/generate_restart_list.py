@@ -1,6 +1,7 @@
 # python generate_restart_list.py file1 file2 output
 
 import sys
+import numpy as np
 
 args = sys.argv
 file1= str(args[1])
