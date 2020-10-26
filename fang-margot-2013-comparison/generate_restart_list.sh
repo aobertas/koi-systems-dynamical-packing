@@ -13,4 +13,4 @@ do
     fi
 
     ((iter++))
-done < "$input1" "$input2"
+done < "$input1" < "$input2"
