@@ -12,7 +12,9 @@ with open(file1, "r") as f1:
         with open(output, "a") as of:
             for i in range(920):
                 archive_name = f1.readline()
-                linenum = int(f2.readline())
+                linenum = f2.readline()
+
+                print(archive_name, linenum)
 
                 if linenum == i:
                     of.write(str(archive_name) + "\n")
