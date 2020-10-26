@@ -12,7 +12,7 @@ i=0
 with open(file1, "r") as f1:
     with open(file2, "r") as f2:
         with open(output, "a") as of:
-            while i < 920:
+            while i < 20:
                 archive_name = f1.readline()
                 linenum = int(f2.readline().strip())
 
