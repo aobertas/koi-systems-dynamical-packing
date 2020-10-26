@@ -7,7 +7,7 @@ input2="initial_run_lines_sorted"
 
 while IFS= read -r f1 <&3 && read -r f2 <&4
 do
-    if [ $f2 == $iter ]
+    if [ $iter == $f2 ]
     then
         echo a #$f1 $f2 $iter
         ((iter++))
