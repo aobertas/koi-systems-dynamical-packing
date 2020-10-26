@@ -15,9 +15,9 @@ with open(file1, "r") as f:
 with open(file2, "r") as f:
     file2_data = f.readlines()
 
-file2_data = [intr(s.rstrip('\n'))]
+file2_data = [int(s.rstrip('\n'))]
 
-print(file1_data[0:10], file2_data[0:10])
+print(file1_data[0:10], file2_data[0:10], file1_data[file2_data[0:10]])
 
 # with open(file2, "r") as f2:
 #         with open(output, "a") as of:
