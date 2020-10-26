@@ -9,11 +9,11 @@ while IFS= read -r f1 <&3 && read -r f2 <&4
 do
     if [ $f2 == $iter ]
     then
-        echo $f1 $f2 $iter
+        echo a #$f1 $f2 $iter
         ((iter++))
     else
         iter=$f2
-        echo $f1 $f2 $iter
+        echo b #$f1 $f2 $iter
     fi
     # if [ $f1 == $iter ]
     # then
