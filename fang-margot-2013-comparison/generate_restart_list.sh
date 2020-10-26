@@ -9,7 +9,7 @@ while IFS= read -r f1 && read -r f2
 do
     if [ $f1 == $iter ]
     then
-        echo $f2 >> koi-gaia-first.txt
+        echo $f2 $iter
     fi
 
     ((iter++))
