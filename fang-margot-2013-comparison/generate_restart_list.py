@@ -17,6 +17,9 @@ with open(file1, "r") as f1:
                 linenum = int(f2.readline().strip())
 
                 while i <= linenum:
+
+                    print(archive_name, linenum, i)
+
                     archive_name = f1.readline().strip()
-                    of.write(str(archive_name) + "\n")
+                    # of.write(str(archive_name) + "\n")
                     i += 1
