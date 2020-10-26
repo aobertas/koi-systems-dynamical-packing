@@ -10,10 +10,10 @@ output = str(args[3])
 i=0
 
 with open(file1, "r") as f:
-    file1_data = f.read()
+    file1_data = f.readlines()
 
 with open(file2, "r") as f:
-    file2_data = f.read()
+    file2_data = f.readlines()
 
 print(file1_data[0:10])
 
