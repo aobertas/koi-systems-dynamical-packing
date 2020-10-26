@@ -2,8 +2,8 @@
 
 iter=0
 
-input1="initial_run_lines_sorted"
-input2="koi-gaia-initial.txt"
+input1="koi-gaia-initial.txt"
+input2="initial_run_lines_sorted"
 
 while IFS= read -r f1 <&3 && read -r f2 <&4
 do
