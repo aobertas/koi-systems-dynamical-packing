@@ -22,7 +22,7 @@ def single_pmass(prad, err1, err2):
         if prad_rand > prad:
             prad_rand = 2 * prad - prad_rand
             
-    return mr.Rpost2M([prad], unit='Earth', grid_size=1e3, classify='No') * m_earth
+    return mr.Rpost2M([prad], unit='Earth', grid_size=1000, classify='No') * m_earth
 
 def get_sim_system(sysid):
     
@@ -77,7 +77,7 @@ def insert_planet(df, sysid, sim, system, dirname, n_samp):
 
             P_insert = np.random.uniform(new_sim.particles[i+1].P, new_sim.particles[i+2].P)
             m_insert = mr.Rpost2M([df['koi_prad'].iloc[np.random.randint(N_rad)]], \
-                                unit='Earth', grid_size=1e3, classify='No') * m_earth
+                                unit='Earth', grid_size=1000, classify='No') * m_earth
             
             new_sim.add(m=m_insert, P=P_insert, e=np.random.rayleigh(0.05), \
                         inc=(np.sign(2 * np.random.random() - 1) * np.random.rayleigh(0.03)), \
