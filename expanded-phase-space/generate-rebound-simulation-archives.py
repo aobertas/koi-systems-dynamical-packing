@@ -103,7 +103,7 @@ def insert_planet(df, sysid, sim, system, dirname, n_samp):
 
 def generate_archives(df, dirname, n_samp):
 
-    for sysid in df['kepid'].unique()[0:20]:
+    for sysid in df['kepid'].unique():
         sim, system = get_sim_system(sysid)
         insert_planet(df, sysid, sim, system, dirname, n_samp)
 
