@@ -9,7 +9,7 @@ iter=0
 #     ((iter++))
 # done
 
-input="koi-gaia-third-restart.txt"
+input="koi-gaia-fourth-restart.txt"
 
 while IFS= read -r f
 do

@@ -1,4 +1,9 @@
 # python generate_restart_list.py file1 file2 output
+#
+# generate file name using
+# awk 'FNR==3 {if($0!="Collision"&&$0!="Escape") print FILENAME}' run-* > file_list
+# awk '{split($0, a, "-", subs); split(a[2], b, ".", subs); print b[1]}' file_list > file_lines
+# sort -n file_lines > file_lines_sorted
 
 import sys
 import numpy as np
