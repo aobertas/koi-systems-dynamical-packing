@@ -53,16 +53,16 @@ def insert_planet(df, sysid, place):
         sim.add(m=pmass, P=period, e=np.random.rayleigh(0.05), inc=np.random.rayleigh(0.03), \
                 omega="uniform", Omega="uniform", f="uniform")
 
-    P_insert = np.random.uniform(new_sim.particles[place+1].P, new_sim.particles[place+2].P)
+    P_insert = np.random.uniform(sim.particles[place+1].P, sim.particles[place+2].P)
     m_insert = mr.Rpost2M([df['koi_prad'].iloc[np.random.randint(N_rad)]], \
                                 unit='Earth', grid_size=1000, classify='No') * m_earth
     sim.add(m=m_insert, P=P_insert, e=np.random.rayleigh(0.05), inc=np.random.rayleigh(0.03), \
             omega="uniform", Omega="uniform", f="uniform")
         
-    ps = new_sim.particles[1:]
+    ps = sim.particles[1:]
         
     maxd = np.array([p.d for p in ps]).max()
-    new_sim.exit_max_distance = 100*maxd
+    sim.exit_max_distance = 100*maxd
 
     for p in ps:
         p.r = p.rhill
