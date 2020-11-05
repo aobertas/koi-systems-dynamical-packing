@@ -4,7 +4,7 @@
 #PBS -j oe
 #PBS -q workq
 #PBS -l walltime=48:00:00
-#PBS -N spock-probs-$i
+#PBS -N spock-probs-$sysid-$place
 # EVERYTHING ABOVE THIS COMMENT IS NECESSARY, SHOULD ONLY CHANGE nodes,ppn,walltime and my_job_name VALUES
 
 # example for submitting to sunnyvale:
