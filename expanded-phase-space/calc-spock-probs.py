@@ -85,15 +85,36 @@ def get_spock_probs(df, sysid, place, dirname, n_samp):
 
     model = spock.FeatureClassifier()
 
-    probs = np.zeros(n_samp)
+    N_planets = len(df[df['kepid'] == sysid]) + 1
+
+    prob = np.zeros(n_samp)
+    mass = np.zeros((N_planets, n_samp))
+    period = np.zeros((N_planets, n_samp))
+    eccentricity = np.zeros((N_planets, n_samp))
+    inclination = np.zeros((N_planets, n_samp))
+    omega = np.zeros((N_planets, n_samp))
+    Omega = np.zeros((N_planets, n_samp))
+    f = np.zeros((N_planets, n_samp))
+
 
     for i in range(n_samp):
         sim = insert_planet(df, sysid, place)
-        probs[i] = calc_spock_prob(sim, model)
+
+        for j, p in enumerate(sim.particles[1:]):
+            mass[j, i] = p.m
+            period[j, i] = p.P
+            eccentricity[j, i] = p.e
+            inclination[j, i] = p.inc
+            omega[j, i] = p.omega
+            Omega[j, i] = p.Omega
+            f[j, i] = p.f
+
+        prob[i] = calc_spock_prob(sim, model)
 
     outfile = dirname + "spock-probs-system-" + str(sysid) + "-" + str(place) + ".npz"
 
-    np.savez(outfile, probs=probs)
+    np.savez(outfile, prob=prob, mass=mass, period=period, eccentricity=eccentricity, \
+        inclination=inclination, omega=omega, Omega=Omega, f=f)
 
     return None
 
