@@ -10,6 +10,12 @@ import random
 
 #######################################################################
 
+sigma_e = 0.01
+sigma_i = np.pi / 180
+sigma_i_insert = np.pi / 180
+
+#######################################################################
+
 def single_pmass(prad, err1, err2):
     m_earth = 3e-6
     
@@ -50,13 +56,13 @@ def insert_planet(df, sysid, place):
         prad_err2 = planet['koi_prad_err2']
 
         pmass = single_pmass(prad, prad_err1, prad_err2)
-        sim.add(m=pmass, P=period, e=np.random.rayleigh(0.05), inc=np.random.rayleigh(0.03), \
+        sim.add(m=pmass, P=period, e=np.random.rayleigh(sigma_e), inc=np.random.rayleigh(sigma_i), \
                 omega="uniform", Omega="uniform", f="uniform")
 
     P_insert = np.random.uniform(sim.particles[place+1].P, sim.particles[place+2].P)
     m_insert = mr.Rpost2M([df['koi_prad'].iloc[np.random.randint(N_rad)]], \
                                 unit='Earth', grid_size=1000, classify='No') * m_earth
-    sim.add(m=m_insert, P=P_insert, e=np.random.rayleigh(0.05), inc=np.random.rayleigh(0.03), \
+    sim.add(m=m_insert, P=P_insert, e=np.random.rayleigh(sigma_e), inc=np.random.rayleigh(sigma_i_insert), \
             omega="uniform", Omega="uniform", f="uniform")
         
     ps = sim.particles[1:]
