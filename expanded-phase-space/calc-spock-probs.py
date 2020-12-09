@@ -10,7 +10,7 @@ import random
 
 #######################################################################
 
-sigma_e = 0.01
+sigma_e = 0.03
 sigma_i = np.pi / 180
 sigma_i_insert = np.pi / 180
 
