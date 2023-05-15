@@ -22,6 +22,6 @@ args = sys.argv
 dirname = str(args[1])
 n_samp = int(args[2])
 
-df = pd.read_csv("../generate-tables/cumulative_koi_gaia_dr2.csv", comment="#")
+df = pd.read_csv("cumulative_koi_gaia_bonomo.csv", comment="#")
 
 run_sunnyvalue_scripts(df, dirname, n_samp)
