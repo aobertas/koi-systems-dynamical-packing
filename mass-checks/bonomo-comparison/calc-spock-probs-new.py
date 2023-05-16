@@ -110,6 +110,8 @@ place = int(args[2])
 dirname = str(args[3])
 n_samp = int(args[4])
 
+dirname = dirname.rstrip("/") + "/"
+
 df = pd.read_csv("cumulative_koi_gaia_bonomo.csv", comment="#")
 
 get_spock_probs(df, sysid, place, dirname, n_samp)
