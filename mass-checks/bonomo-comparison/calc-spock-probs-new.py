@@ -95,6 +95,8 @@ def get_spock_probs(df, sysid, place, dirname, n_samp):
 
     outfile = dirname + "spock-probs-system-" + str(sysid) + "-" + str(place) + ".npz"
 
+    print(outfile)
+
     np.savez(outfile, prob=prob, mass=mass, period=period, eccentricity=eccentricity, \
         inclination=inclination, omega=omega, Omega=Omega, f=f)
 
