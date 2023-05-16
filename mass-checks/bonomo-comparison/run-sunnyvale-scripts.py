@@ -14,12 +14,9 @@ def run_sunnyvalue_scripts(df, dirname, n_samp):
             N_pair = N_planets - 1
 
             for i in range(N_pair):
-                print("qsub -v sysid=" + str(sysid) + ",place=" + str(i) + \
+                os.system("qsub -v sysid=" + str(sysid) + ",place=" + str(i) + \
                     ",dirname=" + dirname + ",n_samp=" + str(n_samp) + \
                     " sunnyvale-qsub-script-spock-probs")
-                # os.system("qsub -v sysid=" + str(sysid) + ",place=" + str(i) + \
-                #     ",dirname=" + dirname + ",n_samp=" + str(n_samp) + \
-                #     " sunnyvale-qsub-script-spock-probs")
 
 #######################################################################
 
