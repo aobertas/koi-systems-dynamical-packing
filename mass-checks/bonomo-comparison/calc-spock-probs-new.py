@@ -6,6 +6,7 @@ import rebound
 import spock
 import mr_forecast as mr
 import sys
+import random
 
 #######################################################################
 
