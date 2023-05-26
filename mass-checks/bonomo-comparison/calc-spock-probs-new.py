@@ -14,9 +14,9 @@ m_earth = 3.0e-6 # mass of earth in REBOUND mass (in units where G=1)
 m_jupiter = 1.0e-3 # mass of earth in REBOUND mass (in units where G=1)
 year = 2.0 * np.pi # one year in REBOUND time (in units where G=1)
 day = year / 365 # one day in REBOUND time (in units where G=1)
-sigma_e = 0.01
-sigma_i = 0.5 * np.pi / 180
-sigma_i_insert = 0.5 * np.pi / 180
+sigma_e = 0.05
+sigma_i = 2.5 * np.pi / 180
+sigma_i_insert = 2.5 * np.pi / 180
 
 #######################################################################
 
